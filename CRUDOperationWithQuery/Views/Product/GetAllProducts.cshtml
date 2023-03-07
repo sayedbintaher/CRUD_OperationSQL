@@ -1,0 +1,50 @@
+﻿@model ICollection<Product>
+
+<div class="container">
+    <div>
+        <a class="btn btn-primary mt-5" asp-controller="Product" asp-action="AddProduct">Add New Product</a>
+    </div>
+
+    <div class="border rounded mt-2">
+        <table id="myTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Serial No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Code</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Action</th>
+                    
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    int i = 0;
+                    @foreach (var product in Model)
+                    {
+                        <tr class="table-active">
+                            <td>@(++i)</td>
+                            <td>@product.Name</td>
+                            <td>@product.Code</td>
+                            <td>@product.Type</td>
+                            <td>@product.Price</td>
+                            <td>
+                                <a class="btn btn-warning" asp-controller="Product" asp-action="UpdateProduct" asp-route-id="@product.ID">Edit</a>
+                                <a class="btn btn-danger" asp-controller="Product" asp-action="DeleteProduct" asp-route-id="@product.ID">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3">No Data Found!</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
